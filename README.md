@@ -17,3 +17,5 @@ This API is connected to youtube music api [https://ytmusicapi.readthedocs.io/en
 # Notes
 
 -- the ytmusic instance file is used to create a global instance to your youtube music account
+
+# NOTE: All controller and service files should not interact with the myytmysicapi
