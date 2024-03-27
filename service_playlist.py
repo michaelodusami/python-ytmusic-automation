@@ -1,6 +1,8 @@
 """
 File: service_playlist.py
 Description: Controller module responsible for managing user interactions and API connections related to playlists.
+@author: Michael-Andre Odusami
+@version: March 2024
 """
 
 import backend_utility
