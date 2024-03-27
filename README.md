@@ -10,6 +10,10 @@ This API is connected to youtube music api [https://ytmusicapi.readthedocs.io/en
 -- follow the directions
 -- come back and run necessary scripts
 
+# Features
+
+-   [] users are able to add all existing playlist songs to an exisitng playlist or new playlist
+
 # Notes
 
 -- the ytmusic instance file is used to create a global instance to your youtube music account
