@@ -6,3 +6,4 @@ class Status(Enum):
     INVALID = 'INVALID'
     DUPLICATES_EXIST = 'DUPLICATES_EXIST'
     IDENTICAL = 'IDENTICAL'
+    NULL = "NULL"
