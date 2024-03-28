@@ -14,7 +14,7 @@ def add_playlist_songs_to_playlist(playlist_id: str, source_playlist_id_or_list:
     printStatus(status)
 
 
-def printStatus(status : str):
+def printStatus(status):
     if status["status"] == "STATUS_FAILED":
         print("Song Addition Failed... Printing Returning Object Of Failiure")
         pprint.pprint(status)
@@ -63,7 +63,7 @@ def get_playlist_id(name_of_playlist: str):
     my_playlist_id = None
     for playlist in playlists:
         if name_of_playlist.lower() == playlist["title"].lower():
-            print(f"Playlist {name_of_playlist.upper()} found...\n")
+            print(f"Playlist {name_of_playlist.upper()} found...")
             # print(playlist)
             my_playlist_id = playlist["playlistId"];
     
