@@ -1,10 +1,20 @@
 from ytmusic_instance import my_ytmusic
-import backend_utility
 import pprint
 from enums import Status
+from typing import Union
 
-def add_playlist_songs_to_playlist(playlist_id : str, source_playlist_id: str):
-    status = my_ytmusic.add_playlist_items(playlistId=playlist_id, source_playlist=source_playlist_id, duplicates=True)
+def add_playlist_songs_to_playlist(playlist_id: str, source_playlist_id_or_list: Union[str, list]):
+    if isinstance(source_playlist_id_or_list, str):
+        status = my_ytmusic.add_playlist_items(playlistId=playlist_id, source_playlist=source_playlist_id_or_list, duplicates=True)
+    elif isinstance(source_playlist_id_or_list, list):
+        status = my_ytmusic.add_playlist_items(playlistId=playlist_id, videoIds=source_playlist_id_or_list, duplicates=True)
+    else:
+        raise ValueError("Invalid type for source_playlist_id_or_list")
+
+    printStatus(status)
+
+
+def printStatus(status : str):
     if status["status"] == "STATUS_FAILED":
         print("Song Addition Failed... Printing Returning Object Of Failiure")
         pprint.pprint(status)
@@ -12,15 +22,14 @@ def add_playlist_songs_to_playlist(playlist_id : str, source_playlist_id: str):
         print("Song Addition Success...")
 
 
-
 """
 this function returns a list of video id's that have been filtered from two playlist containing duplicate songs
 """
-def getFilteredSongsFromDuplicatePlaylist(first_playlist_id, second_playlist_id): 
+def getFilteredSongsFromDuplicatePlaylist(first_playlist_id : str, second_playlist_id : str): 
         # get the playlists
         try:
-            first_playlist_tracks = backend_utility.get_playlist_tracks(first_playlist_id)
-            second_playlist_tracks = backend_utility.get_playlist_tracks(second_playlist_id)
+            first_playlist_tracks = get_playlist_tracks(first_playlist_id)
+            second_playlist_tracks = get_playlist_tracks(second_playlist_id)
             list_of_duplicate_ids = set()
 
             # get the duplicate keys
@@ -67,9 +76,9 @@ def get_playlist_id(name_of_playlist: str):
 """
 this function takes two playlists id's, returns if there are duplicate songs
 """
-def hasDuplicateSongs(first_playlist_id, second_playlist_id):
-    if (first_playlist_id == second_playlist_id):
-        return Status.IDENTICAL
+def hasDuplicateSongs(first_playlist_id : str, second_playlist_id : str):
+    # if (first_playlist_id == second_playlist_id):
+    #     return Status.IDENTICAL
     
     # get the tracks
     first_playlist_tracks = get_playlist_tracks(first_playlist_id)
@@ -81,13 +90,14 @@ def hasDuplicateSongs(first_playlist_id, second_playlist_id):
         for track2 in second_playlist_tracks:
             if track2["videoId"] == videoId:
                 return Status.DUPLICATES_EXIST
-                
+
+    return Status.DUPLICATES_DNE
 
 
         
 
 
-def get_playlist_tracks(playlist_id):
+def get_playlist_tracks(playlist_id : str):
     if playlist_id == None:
         raise Exception("Playlist ID is null <playlist_id = None>")
     if not playlist_id:
