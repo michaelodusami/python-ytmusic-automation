@@ -31,8 +31,12 @@ def add_songs_from_existing_playlist_to_other_playlist_service(destination_playl
         destination_playlist_id = backend_playlist.get_playlist_id(destination_playlist_name)
         source_playlist_id = backend_playlist.get_playlist_id(source_playlist_name)
 
-        responseStatus = backend_playlist.hasDuplicateSongs(first_playlist_id=destination_playlist_id, 
-                                               second_playlist_id=source_playlist_id)
+        # responseStatus = backend_playlist.hasDuplicateSongs(first_playlist_id=destination_playlist_id, 
+        #                                        second_playlist_id=source_playlist_id)
+
+        responseStatus = backend_playlist.hasDuplicateSongs(source_playlist_id, source_playlist_id)
+
+        print(responseStatus)
 
         # check for duplicates
         if responseStatus == Status.DUPLICATES_EXIST:
@@ -41,8 +45,8 @@ def add_songs_from_existing_playlist_to_other_playlist_service(destination_playl
                 backend_playlist.add_playlist_songs_to_playlist(playlist_id=destination_playlist_id, source_playlist_id_or_list=list_of_song_ids)
             else:
                 print("No songs to add to the playlist")
-        elif responseStatus == Status.IDENTICAL:
-            print("Playlists are identical. No need to add. Returning...")
+        # elif responseStatus == Status.IDENTICAL:
+        #     print("Playlists are identical. No need to add. Returning...")
         else:
             # Add songs to the destination playlist
             backend_playlist.add_playlist_songs_to_playlist(playlist_id=destination_playlist_id,  source_playlist_id_or_list=source_playlist_id)
@@ -50,7 +54,9 @@ def add_songs_from_existing_playlist_to_other_playlist_service(destination_playl
     except Exception as e:
         print(e)
 
-
+def has_duplicates_service(playlistName : str):
+    id = backend_playlist.get_playlist_id(playlistName)
+    return backend_playlist.hasDuplicateSongs(id, id)
 
 
 # placeholder

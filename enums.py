@@ -8,3 +8,4 @@ class Status(Enum):
     IDENTICAL = 'IDENTICAL'
     NULL = "NULL"
     FAILED = "FAILED"
+    DUPLICATES_DNE = "DUPES DNE"
