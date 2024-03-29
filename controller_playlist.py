@@ -29,10 +29,6 @@ class Playlist:
             source_playlist_name = self.get_playlist_name("Enter the name of the source playlist: ")
             service_playlist.add_songs_from_existing_playlist_to_other_playlist_service(destination_playlist_name=destination_playlist_name, source_playlist_name=source_playlist_name)
 
-
-        def playlistHasDuplicates(self):
-            playlistName = self.get_playlist_name("Enter the name of the playlist: ")
-            print(service_playlist.has_duplicates_service(playlistName=playlistName))
              
 
 
