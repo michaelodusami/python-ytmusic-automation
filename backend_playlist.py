@@ -51,6 +51,24 @@ def getFilteredSongsFromDuplicatePlaylist(first_playlist_id : str, second_playli
         except Exception as e:
             print(e)
 
+def getNonDuplicatedSongsFromPlaylist(id):
+    tracks = get_playlist_tracks(id)
+    track_frequency = dict()
+    for track in tracks:
+        videoId = track["videoId"]
+        found = False
+        for trackToCheck in tracks:
+            if videoId == trackToCheck["videoId"]:
+                if videoId not in track_frequency:
+                    track_frequency[videoId] = 0
+                else:
+                    track_frequency[videoId] += 1
+    non_duplicated_ids = []
+    for video_id, freq in track_frequency.items():
+        if freq == 0:
+            non_duplicated_ids.append(video_id)
+    
+    return non_duplicated_ids
 
 
 """
@@ -63,8 +81,6 @@ def get_playlist_id(name_of_playlist: str):
     my_playlist_id = None
     for playlist in playlists:
         if name_of_playlist.lower() == playlist["title"].lower():
-            print(f"Playlist {name_of_playlist.upper()} found...")
-            # print(playlist)
             my_playlist_id = playlist["playlistId"];
     
     if my_playlist_id == None:
