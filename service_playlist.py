@@ -34,29 +34,21 @@ def add_songs_from_existing_playlist_to_other_playlist_service(destination_playl
         # responseStatus = backend_playlist.hasDuplicateSongs(first_playlist_id=destination_playlist_id, 
         #                                        second_playlist_id=source_playlist_id)
 
-        responseStatus = backend_playlist.hasDuplicateSongs(source_playlist_id, source_playlist_id)
+       #  responseStatus = backend_playlist.hasDuplicateSongs(source_playlist_id, source_playlist_id)
 
-        print(responseStatus)
+        # print(responseStatus)
 
-        # check for duplicates
-        if responseStatus == Status.DUPLICATES_EXIST:
-            list_of_song_ids = backend_playlist.getFilteredSongsFromDuplicatePlaylist(first_playlist_id=destination_playlist_id, second_playlist_id=source_playlist_id)
-            if (list_of_song_ids):
-                backend_playlist.add_playlist_songs_to_playlist(playlist_id=destination_playlist_id, source_playlist_id_or_list=list_of_song_ids)
-            else:
-                print("No songs to add to the playlist")
-        # elif responseStatus == Status.IDENTICAL:
-        #     print("Playlists are identical. No need to add. Returning...")
+        # the issue I was running into was adding a playlust with duplicate songs to a new playlist
+        duplicate_songs_from_source_playlist = backend_playlist.getSongsFromPlaylist(source_playlist_id, dupes=True) 
+        if duplicate_songs_from_source_playlist:
+            non_duplicate_songs = backend_playlist.getSongsFromPlaylist(source_playlist_id, dupes=False)
+            backend_playlist.add_playlist_songs_to_playlist(playlist_id=destination_playlist_id, source_playlist_id_or_list=non_duplicate_songs)
         else:
-            # Add songs to the destination playlist
-            backend_playlist.add_playlist_songs_to_playlist(playlist_id=destination_playlist_id,  source_playlist_id_or_list=source_playlist_id)
-    
+            backend_playlist.add_playlist_songs_to_playlist(playlist_id=destination_playlist_id, source_playlist_id_or_list=source_playlist_id)
+
     except Exception as e:
         print(e)
 
-def has_duplicates_service(playlistName : str):
-    id = backend_playlist.get_playlist_id(playlistName)
-    return backend_playlist.hasDuplicateSongs(id, id)
 
 
 # placeholder
