@@ -25,7 +25,7 @@ def printStatus(status):
 """
 this function returns a list of video id's that have been filtered from two playlist containing duplicate songs
 """
-def getFilteredSongsFromDuplicatePlaylist(first_playlist_id : str, second_playlist_id : str): 
+"""def getFilteredSongsFromDuplicatePlaylist(first_playlist_id : str, second_playlist_id : str): 
         # get the playlists
         try:
             first_playlist_tracks = get_playlist_tracks(first_playlist_id)
@@ -49,26 +49,37 @@ def getFilteredSongsFromDuplicatePlaylist(first_playlist_id : str, second_playli
             
             return list_of_non_dupes
         except Exception as e:
-            print(e)
+            print(e)"""
 
-def getNonDuplicatedSongsFromPlaylist(id):
-    tracks = get_playlist_tracks(id)
-    track_frequency = dict()
-    for track in tracks:
-        videoId = track["videoId"]
-        found = False
-        for trackToCheck in tracks:
-            if videoId == trackToCheck["videoId"]:
-                if videoId not in track_frequency:
-                    track_frequency[videoId] = 0
-                else:
-                    track_frequency[videoId] += 1
-    non_duplicated_ids = []
-    for video_id, freq in track_frequency.items():
-        if freq == 0:
-            non_duplicated_ids.append(video_id)
-    
-    return non_duplicated_ids
+# dupes param : if you want to receive duplicate song ids, or non duplicated song ids
+def getSongsFromPlaylist(id, dupes=False):
+    try:
+        tracks = get_playlist_tracks(id)
+        track_frequency = dict()
+        for track in tracks:
+            videoId = track["videoId"]
+            found = False
+            for trackToCheck in tracks:
+                if videoId == trackToCheck["videoId"]:
+                    if videoId not in track_frequency:
+                        track_frequency[videoId] = 0
+                    else:
+                        track_frequency[videoId] += 1
+        ids = []
+        if dupes == False:
+            # do not get duplicated son ids
+            for video_id, freq in track_frequency.items():
+                if freq == 0:
+                    ids.append(video_id)
+        else:
+            # get duplicated song ids
+            for video_id, freq in track_frequency.items():
+                if freq > 0:
+                    ids.append(video_id)
+        
+        return ids
+    except Exception as e:
+        print(e)
 
 
 """
@@ -92,22 +103,22 @@ def get_playlist_id(name_of_playlist: str):
 """
 this function takes two playlists id's, returns if there are duplicate songs
 """
-def hasDuplicateSongs(first_playlist_id : str, second_playlist_id : str):
-    # if (first_playlist_id == second_playlist_id):
-    #     return Status.IDENTICAL
+# def hasDuplicateSongs(first_playlist_id : str, second_playlist_id : str):
+#     # if (first_playlist_id == second_playlist_id):
+#     #     return Status.IDENTICAL
     
-    # get the tracks
-    first_playlist_tracks = get_playlist_tracks(first_playlist_id)
-    second_playlist_tracks = get_playlist_tracks(second_playlist_id)
+#     # get the tracks
+#     first_playlist_tracks = get_playlist_tracks(first_playlist_id)
+#     second_playlist_tracks = get_playlist_tracks(second_playlist_id)
 
-    # go throguh each track and see if it exists
-    for track in first_playlist_tracks:
-        videoId = track["videoId"]
-        for track2 in second_playlist_tracks:
-            if track2["videoId"] == videoId:
-                return Status.DUPLICATES_EXIST
+#     # go throguh each track and see if it exists
+#     for track in first_playlist_tracks:
+#         videoId = track["videoId"]
+#         for track2 in second_playlist_tracks:
+#             if track2["videoId"] == videoId:
+#                 return Status.DUPLICATES_EXIST
 
-    return Status.DUPLICATES_DNE
+#     return Status.DUPLICATES_DNE
 
 
         
