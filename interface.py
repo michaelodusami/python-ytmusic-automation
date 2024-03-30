@@ -1,0 +1,32 @@
+from controller_playlist import Playlist
+import pyinputplus
+
+class Interface:
+    def __init__(self) -> None:
+        self.playlistController = Playlist()
+        self.user_choice = None
+    
+    def playlist_menu(self):
+        print("\n======= Playlist Menu =======")
+        print("1p. Create a new playlist")
+        print("2p. Remove a playlist")
+        print("3p. Rename a playlist")
+        print("4p. Add a song to a playlist")
+        print("5p. Remove a song from a playlist")
+        print("6p. Add all playlist song items to another playlist")
+        print("7p. Exit")
+
+    def get_choice(self):
+        self.user_choice = pyinputplus.inputStr(prompt="your choice -> ")
+
+    def handleChoice(self):
+        if "p" in self.user_choice:
+            self.handlePlaylistChoice()
+        # reset choice
+        self.user_choice = None
+
+    def handlePlaylistChoice(self):
+        match self.user_choice:
+            case "6p":
+                self.playlistController.add_songs_from_existing_playlist_to_other_playlist()
+        
