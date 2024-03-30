@@ -5,9 +5,12 @@ class Interface:
     def __init__(self) -> None:
         self.playlistController = Playlist()
         self.user_choice = None
+
+    def print_title(self, title):
+         print(f"\n======= {title} =======")
     
     def playlist_menu(self):
-        print("\n======= Playlist Menu =======")
+        self.print_title("Playlist Options")
         print("1p. Create a new playlist")
         print("2p. Remove a playlist")
         print("3p. Rename a playlist")
