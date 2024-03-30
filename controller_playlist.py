@@ -30,4 +30,7 @@ class Playlist:
             source_playlist_name = self.prompt_user("Enter the name of the source playlist: ")
             service_playlist.add_songs_from_existing_playlist_to_other_playlist_service(destination_playlist_name=destination_playlist_name, source_playlist_name=source_playlist_name)
 
-             
+        def create_playlist_controller(self):
+            name_of_playlist = self.prompt_user("Enter the name of the playlist to create: ")
+            description_of_playlist = self.prompt_user("Enter the description of the playlist: ")
+            service_playlist.create_playlist_service(title=name_of_playlist, description=description_of_playlist)
