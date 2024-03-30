@@ -8,7 +8,6 @@ Description: backend module responsible for interacting directly with the yt mus
 
 from ytmusic_instance import my_ytmusic
 import pprint
-from enums import Status
 from typing import Union
 
 def add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id: str, list_of_songs: list):
