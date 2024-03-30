@@ -17,10 +17,10 @@ def add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id: str, list_
 
 def printStatus(status : str | dict):
     if status["status"] == "STATUS_FAILED":
-        print("Song Addition Failed... Printing Returning Object Of Failiure")
+        print("Failed... Printing Returning Object Of Failiure")
         pprint.pprint(status)
     else:
-        print("Song Addition Success...")
+        print("Success...")
 
 
 def get_playlist_id(name_of_playlist: str):
@@ -92,3 +92,10 @@ def find_unique_songs_for_playlist(destination_id : str, source_id : str):
         return list(set(list_of_unique_songs))
     except Exception as e:
         print(e)
+
+def create_playlist(title = "New Playlist", description = "", privacy_status = "PRIVATE"):
+    """
+    Creates a new playlist for the user
+    """
+    status = my_ytmusic.create_playlist(title=title, description=description, privacy_status=privacy_status)
+    printStatus(status=status)
