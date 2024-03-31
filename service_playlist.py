@@ -143,7 +143,8 @@ def print_playlist_information_on_text_file_service(title: str, file_name: str):
             # Write Tracks
             file.write("## Tracks:\n")
             for track in obj['tracks']:
-                attributes_to_write = ['videoId', 'title', 'artists', 'album', 'likeStatus', 'isAvailable', 'isExplicit', 'videoType']
+                file.write(f"### Track: {track['title']}\n")
+                attributes_to_write = ['title', 'videoId', 'artists', 'album', 'likeStatus', 'isAvailable', 'isExplicit', 'videoType']
                 for attribute in attributes_to_write:
                     write_attribute(file, track, attribute)
                 file.write("\n")
