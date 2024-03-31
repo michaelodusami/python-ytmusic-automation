@@ -32,29 +32,27 @@ def add_songs_from_existing_playlist_to_other_playlist_service(destination_playl
         source_playlist_id = backend_playlist.get_playlist_id(source_playlist_name)
         unique_songs = backend_playlist.find_unique_songs_for_playlist(destination_id=destination_playlist_id, source_id=source_playlist_id)
         if not unique_songs:
-            print("Songs already in playlist...")
-            return
-        backend_playlist.add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id=destination_playlist_id, list_of_songs=unique_songs)
-
+            return "Songs already in playlist..."
+        return backend_playlist.add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id=destination_playlist_id, list_of_songs=unique_songs)
     except Exception as e:
-        print(e)
+        return e
 
 def create_playlist_service(title = "New Playlist", description = ""):
-    backend_playlist.create_playlist(title=title,description=description)
+   return backend_playlist.create_playlist(title=title,description=description)
 
 def remove_playlist_service(title : str):
     try:
         playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
-        backend_playlist.delete_playlist(playlist_id)
+        return backend_playlist.delete_playlist(playlist_id)
     except Exception as e:
-        print(e)
+        return e
 
 def rename_playlist_service(title : str, newTitle : str):
     try:
         playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
-        backend_playlist.rename_playlist(playlist_id=playlist_id, title=newTitle)
+        return backend_playlist.rename_playlist(playlist_id=playlist_id, title=newTitle)
     except Exception as e:
-        print(e)
+        return e
 
 def add_songs_to_playlist_service(title : str, song_names: list):
     try:
@@ -71,11 +69,10 @@ def add_songs_to_playlist_service(title : str, song_names: list):
         track_song_ids = list(set([track["videoId"] for track in tracks]))
         unique_song_ids = [song_id for song_id in song_ids if song_id not in track_song_ids]
         if not unique_song_ids:
-            print("Songs already in playlist.")
-            return
-        backend_playlist.add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id=playlist_id, list_of_songs=unique_song_ids)
+            return "Songs already in playlist."
+        return backend_playlist.add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id=playlist_id, list_of_songs=unique_song_ids)
     except Exception as e:
-        print(e)
+        return e
     
 def remove_songs_from_playlist_service(title: str, song_names: list):
     def is_similar(word1, word2, threshold=2):
@@ -95,17 +92,16 @@ def remove_songs_from_playlist_service(title: str, song_names: list):
         playlist_tracks = videos["tracks"]
         similar_tracks = filter_similar_tracks(playlist_tracks, song_names)
         if not similar_tracks:
-            print("Song not found.")
-            return
-        backend_playlist.remove_song_from_playlist(playlist_id=playlist_id, songs=similar_tracks)
+            return "Song not found."
+        return backend_playlist.remove_song_from_playlist(playlist_id=playlist_id, songs=similar_tracks)
         
     except Exception as e:
-        print(e)
+        return e
 
 def remove_all_songs_from_playlist_service(title: str):
     try:
         playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
         tracks = backend_playlist.get_playlist_tracks(playlist_id=playlist_id)
-        backend_playlist.remove_song_from_playlist(playlist_id=playlist_id, songs=tracks)
+        return backend_playlist.remove_song_from_playlist(playlist_id=playlist_id, songs=tracks)
     except Exception as e:
-        print(e)
+        return e

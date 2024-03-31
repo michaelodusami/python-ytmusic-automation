@@ -12,7 +12,7 @@ import pprint
 def add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id: str, list_of_songs: list):
     status = my_ytmusic.add_playlist_items(playlistId=playlist_id, videoIds=list_of_songs)
     # printStatus(status)
-    print("Songs Added")
+    return "Songs Added"
 
 
 # def printStatus(status : str | dict):
@@ -96,15 +96,15 @@ def create_playlist(title = "New Playlist", description = ""):
     Creates a new playlist for the user
     """
     status = my_ytmusic.create_playlist(title=title, description=description)
-    print("Playlist Created")
+    return "Playlist Created"
 
 def delete_playlist(playlist_id : str):
     status = my_ytmusic.delete_playlist(playlistId=playlist_id)
-    print("Playlist has been deleted.")
+    return "Playlist has been deleted."
 
 def rename_playlist(playlist_id : str, title : str ):
     status = my_ytmusic.edit_playlist(playlistId=playlist_id, title=title)
-    print("Playlist Has Been Renamed.")
+    return "Playlist Has Been Renamed."
 
 def get_song_information(name_of_song: str):
     results = my_ytmusic.search(name_of_song, filter="songs", limit=1)
@@ -112,4 +112,4 @@ def get_song_information(name_of_song: str):
 
 def remove_song_from_playlist(playlist_id: str, songs: list):
     my_ytmusic.remove_playlist_items(playlistId=playlist_id, videos=songs)
-    print("Songs Removed")
+    return "Songs Removed"

@@ -28,21 +28,25 @@ class Playlist:
         def add_songs_from_existing_playlist_to_other_playlist_controller(self):
             destination_playlist_name = self.prompt_user("Enter the name of the destination playlist: ")
             source_playlist_name = self.prompt_user("Enter the name of the source playlist: ")
-            service_playlist.add_songs_from_existing_playlist_to_other_playlist_service(destination_playlist_name=destination_playlist_name, source_playlist_name=source_playlist_name)
+            response = service_playlist.add_songs_from_existing_playlist_to_other_playlist_service(destination_playlist_name=destination_playlist_name, source_playlist_name=source_playlist_name)
+            print(response)
 
         def create_playlist_controller(self):
             name_of_playlist = self.prompt_user("Enter the name of the playlist to create: ")
             description_of_playlist = self.prompt_user("Enter the description of the playlist: ")
-            service_playlist.create_playlist_service(title=name_of_playlist, description=description_of_playlist)
+            response = service_playlist.create_playlist_service(title=name_of_playlist, description=description_of_playlist)
+            print(response)
 
         def remove_playlist_controller(self):
             name_of_playlist = self.prompt_user("Enter the name of the playlist to remove: ")
-            service_playlist.remove_playlist_service(title=name_of_playlist)
+            response = service_playlist.remove_playlist_service(title=name_of_playlist)
+            print(response)
         
         def rename_playlist_controller(self):
             name_of_playlist = self.prompt_user("Enter the name of the playlist to rename: ")
             new_name_of_playlist = self.prompt_user("Enter the new name of the playlist: ")
-            service_playlist.rename_playlist_service(title=name_of_playlist, newTitle=new_name_of_playlist)
+            response = service_playlist.rename_playlist_service(title=name_of_playlist, newTitle=new_name_of_playlist)
+            print(response)
         
         def add_songs_to_playlist_controller(self):
             name_of_playlist = self.prompt_user("Enter the name of the playlist to add to: ")
@@ -52,7 +56,9 @@ class Playlist:
                 if song == "-1":
                     break
                 songs.append(song)
-            service_playlist.add_songs_to_playlist_service(title=name_of_playlist, song_names=songs)
+            response = service_playlist.add_songs_to_playlist_service(title=name_of_playlist, song_names=songs)
+            print(response)
+
 
         def remove_songs_from_playlist_controller(self):
             name_of_playlist = self.prompt_user("Enter the name of the playlist to remove a song from: ")
@@ -62,11 +68,14 @@ class Playlist:
                 if song == "-1":
                     break
                 songs.append(song)
-            service_playlist.remove_songs_from_playlist_service(title=name_of_playlist, song_names=songs)
-        
+            response = service_playlist.remove_songs_from_playlist_service(title=name_of_playlist, song_names=songs)
+            print(response)
+
         def remove_all_songs_from_playlist_controller(self):
             name_of_playlist = self.prompt_user("Enter the name of the playlist to remove a song from: ")
             confirmation = (pyip.inputYesNo(prompt="Are you sure you want to remove all songs from playlist (Yes or No): ")).lower()
             if confirmation == "yes" or confirmation == "y":
-                service_playlist.remove_all_songs_from_playlist_service(title=name_of_playlist)
-            
+                response = service_playlist.remove_all_songs_from_playlist_service(title=name_of_playlist)
+                print(response)
+            else:
+                print("[FAILED] Removing all songs from playlist")
