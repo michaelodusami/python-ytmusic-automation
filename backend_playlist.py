@@ -12,15 +12,12 @@ from typing import Union
 
 def add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id: str, list_of_songs: list):
     status = my_ytmusic.add_playlist_items(playlistId=playlist_id, videoIds=list_of_songs)
-    printStatus(status)
+    # printStatus(status)
+    print("Playlist Items Added")
 
 
-def printStatus(status : str | dict):
-    if status["status"] == "STATUS_FAILED":
-        print("Failed... Printing Returning Object Of Failiure")
-        pprint.pprint(status)
-    else:
-        print("Success...")
+# def printStatus(status : str | dict):
+#     pprint.pprint(status)
 
 
 def get_playlist_id(name_of_playlist: str):
@@ -93,9 +90,9 @@ def find_unique_songs_for_playlist(destination_id : str, source_id : str):
     except Exception as e:
         print(e)
 
-def create_playlist(title = "New Playlist", description = "", privacy_status = "PRIVATE"):
+def create_playlist(title = "New Playlist", description = ""):
     """
     Creates a new playlist for the user
     """
-    status = my_ytmusic.create_playlist(title=title, description=description, privacy_status=privacy_status)
-    printStatus(status=status)
+    status = my_ytmusic.create_playlist(title=title, description=description)
+    print("Playlist Created")
