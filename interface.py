@@ -1,20 +1,19 @@
-from controller_playlist import Playlist
+import controller_playlist
 import pyinputplus
 
 class Interface:
     def __init__(self) -> None:
-        self.playlistController = Playlist()
         self.user_choice = None
         self.choices = {
-            "1p": self.playlistController.create_playlist_controller,
-            "2p": self.playlistController.remove_playlist_controller,
-            "3p": self.playlistController.rename_playlist_controller,
-            "4p": self.playlistController.add_songs_to_playlist_controller,
-            "5p": self.playlistController.remove_songs_from_playlist_controller,
-            "6p": self.playlistController.add_songs_from_existing_playlist_to_other_playlist_controller,
-            "7p": self.playlistController.remove_all_songs_from_playlist_controller,
-            "8p": self.playlistController.print_playlist_information_on_text_file_controller,
-            "9p": self.playlistController.view_playlist_information_controller,
+            "1p": controller_playlist.create_playlist_controller,
+            "2p": controller_playlist.remove_playlist_controller,
+            "3p": controller_playlist.rename_playlist_controller,
+            "4p": controller_playlist.add_songs_to_playlist_controller,
+            "5p": controller_playlist.remove_songs_from_playlist_controller,
+            "6p": controller_playlist.add_songs_from_existing_playlist_to_other_playlist_controller,
+            "7p": controller_playlist.remove_all_songs_from_playlist_controller,
+            "8p": controller_playlist.print_playlist_information_on_text_file_controller,
+            "9p": controller_playlist.view_playlist_information_controller,
         }
 
     def print_title(self, title):
