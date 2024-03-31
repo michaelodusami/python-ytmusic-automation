@@ -6,6 +6,8 @@ Description: Controller module responsible for managing user interactions and AP
 """
 
 import backend_playlist 
+import Levenshtein
+import pprint
 
 def add_songs_from_existing_playlist_to_other_playlist_service(destination_playlist_name, source_playlist_name):
     """
@@ -74,4 +76,25 @@ def add_songs_to_playlist_service(title : str, song_names: list):
         backend_playlist.add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id=playlist_id, list_of_songs=unique_song_ids)
     except Exception as e:
         print(e)
+    
+def remove_songs_from_playlist_service(title: str, song_names: list):
+    def is_similar(word1, word2, threshold=2):
+        distance = Levenshtein.distance(word1, word2)
+        return distance <= threshold
+    def filter_similar_tracks(tracks, song_names, threshold=2):
+        similar_tracks = []
+        for track in tracks:
+            for song_name in song_names:
+                if is_similar(track["title"], song_name, threshold):
+                    similar_tracks.append(track)
+                    break  # Break the inner loop once a similar track is found
+        return similar_tracks
+    try:
+        playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
+        videos = backend_playlist.get_playlist(playlist_id=playlist_id)
+        playlist_tracks = videos["tracks"]
+        similar_tracks = filter_similar_tracks(playlist_tracks, song_names)
+        backend_playlist.remove_song_from_playlist(playlist_id=playlist_id, songs=similar_tracks)
         
+    except Exception as e:
+        print(e)

@@ -18,6 +18,8 @@ def add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id: str, list_
 # def printStatus(status : str | dict):
 #     pprint.pprint(status)
 
+def get_playlist(playlist_id : str):
+    return my_ytmusic.get_playlist(playlistId=playlist_id)
 
 def get_playlist_id(name_of_playlist: str):
     """
@@ -107,3 +109,7 @@ def rename_playlist(playlist_id : str, title : str ):
 def get_song_information(name_of_song: str):
     results = my_ytmusic.search(name_of_song, filter="songs", limit=1)
     return results[0]
+
+def remove_song_from_playlist(playlist_id: str, songs: list):
+    my_ytmusic.remove_playlist_items(playlistId=playlist_id, videos=songs)
+    print("Songs Removed")

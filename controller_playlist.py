@@ -25,7 +25,7 @@ class Playlist:
             response = pyip.inputStr(prompt)
             return response
 
-        def add_songs_from_existing_playlist_to_other_playlist(self):
+        def add_songs_from_existing_playlist_to_other_playlist_controller(self):
             destination_playlist_name = self.prompt_user("Enter the name of the destination playlist: ")
             source_playlist_name = self.prompt_user("Enter the name of the source playlist: ")
             service_playlist.add_songs_from_existing_playlist_to_other_playlist_service(destination_playlist_name=destination_playlist_name, source_playlist_name=source_playlist_name)
@@ -44,7 +44,7 @@ class Playlist:
             new_name_of_playlist = self.prompt_user("Enter the new name of the playlist: ")
             service_playlist.rename_playlist_service(title=name_of_playlist, newTitle=new_name_of_playlist)
         
-        def add_songs_to_playlist(self):
+        def add_songs_to_playlist_controller(self):
             name_of_playlist = self.prompt_user("Enter the name of the playlist to add to: ")
             songs = []
             while True:
@@ -53,3 +53,13 @@ class Playlist:
                     break
                 songs.append(song)
             service_playlist.add_songs_to_playlist_service(title=name_of_playlist, song_names=songs)
+
+        def remove_songs_from_playlist_controller(self):
+            name_of_playlist = self.prompt_user("Enter the name of the playlist to remove a song from: ")
+            songs = []
+            while True:
+                song = self.prompt_user("Enter the name of the song you want to remove | Enter -1 to stop: ")
+                if song == "-1":
+                    break
+                songs.append(song)
+            service_playlist.remove_songs_from_playlist_service(title=name_of_playlist, song_names=songs)

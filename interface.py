@@ -9,8 +9,10 @@ class Interface:
             "1p": self.playlistController.create_playlist_controller,
             "2p": self.playlistController.remove_playlist_controller,
             "3p": self.playlistController.rename_playlist_controller,
-            "4p": self.playlistController.add_songs_to_playlist,
-            "6p": self.playlistController.add_songs_from_existing_playlist_to_other_playlist,
+            "4p": self.playlistController.add_songs_to_playlist_controller,
+            "5p": self.playlistController.remove_songs_from_playlist_controller,
+            "6p": self.playlistController.add_songs_from_existing_playlist_to_other_playlist_controller,
+
         }
 
     def print_title(self, title):
@@ -24,7 +26,8 @@ class Interface:
         print("4p. Add a song to a playlist")
         print("5p. Remove a song from a playlist")
         print("6p. Add all playlist song items to another playlist")
-        print("7p. Exit")
+        print("7p. Remove all songs from playlist")
+        print("8p. Exit")
 
     def get_choice(self):
         self.user_choice = pyinputplus.inputStr(prompt="your choice -> ")
