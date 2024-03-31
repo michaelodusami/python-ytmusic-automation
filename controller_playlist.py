@@ -34,3 +34,7 @@ class Playlist:
             name_of_playlist = self.prompt_user("Enter the name of the playlist to create: ")
             description_of_playlist = self.prompt_user("Enter the description of the playlist: ")
             service_playlist.create_playlist_service(title=name_of_playlist, description=description_of_playlist)
+
+        def remove_playlist_controller(self):
+            name_of_playlist = self.prompt_user("Enter the name of the playlist to remove: ")
+            service_playlist.remove_playlist_service(title=name_of_playlist)
