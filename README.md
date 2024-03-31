@@ -62,7 +62,7 @@ The program offers the following playlist management functionalities:
     - This file contains functions that act as an intermediary between the user interface (interface.py) and the service layer (service_playlist.py). These functions prompt the user for input and call the corresponding service functions to execute playlist operations.
 
 **ytmusic_instance.py**
-    - This script initializes a YTMusic object using the YTMusicAPI library, allowing interaction with YouTube Music's web interface. It also contains the main function run() that starts the program by initializing the interface and handling user input.
+    - This script initializes a YTMusic object using the YTMusicAPI library, allowing interaction with YouTube Music's web interface. 
 
 **backend_playlist.py**
     - This module serves as the backend layer responsible for directly interacting with the YouTube Music instance or account. It contains functions that perform actions such as adding songs to playlists, retrieving playlist information, creating playlists, and more. These functions utilize the YTMusic object initialized in ytmusic_instance.py to communicate with YouTube Music.
