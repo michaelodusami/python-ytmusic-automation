@@ -7,6 +7,7 @@ class Interface:
         self.user_choice = None
         self.choices = {
             "1p": self.playlistController.create_playlist_controller,
+            "2p": self.playlistController.remove_playlist_contoller,
             "6p": self.playlistController.add_songs_from_existing_playlist_to_other_playlist,
         }
 
