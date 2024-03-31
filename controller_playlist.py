@@ -38,3 +38,10 @@ class Playlist:
         def remove_playlist_controller(self):
             name_of_playlist = self.prompt_user("Enter the name of the playlist to remove: ")
             service_playlist.remove_playlist_service(title=name_of_playlist)
+        
+        def rename_playlist_controller(self):
+            name_of_playlist = self.prompt_user("Enter the name of the playlist to rename: ")
+            new_name_of_playlist = self.prompt_user("Enter the new name of the playlist: ")
+            service_playlist.rename_playlist_service(title=name_of_playlist, newTitle=new_name_of_playlist)
+        
+        
