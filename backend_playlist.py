@@ -103,3 +103,7 @@ def delete_playlist(playlist_id : str):
 def rename_playlist(playlist_id : str, title : str ):
     status = my_ytmusic.edit_playlist(playlistId=playlist_id, title=title)
     print("Playlist Has Been Renamed.")
+
+def get_song_information(name_of_song: str):
+    results = my_ytmusic.search(name_of_song, filter="songs", limit=1)
+    return results[0]
