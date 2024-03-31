@@ -46,3 +46,10 @@ def remove_playlist_service(title : str):
         backend_playlist.delete_playlist(playlist_id)
     except Exception as e:
         print(e)
+
+def rename_playlist_service(title : str, newTitle : str):
+    try:
+        playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
+        backend_playlist.rename_playlist(playlist_id=playlist_id, title=newTitle)
+    except Exception as e:
+        print(e)
