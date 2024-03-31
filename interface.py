@@ -28,7 +28,7 @@ class Interface:
         print("5p. Remove a song from a playlist")
         print("6p. Add all playlist song items to another playlist")
         print("7p. Remove all songs from playlist")
-        print("8p. Send Playlist Songs To Text File")
+        print("8p. Send Playlist Songs To Markdown File")
 
     def get_choice(self):
         self.user_choice = pyinputplus.inputStr(prompt="your choice -> ")
