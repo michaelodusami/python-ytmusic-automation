@@ -8,6 +8,7 @@ Description: Controller module responsible for managing user interactions and AP
 import backend_playlist 
 import Levenshtein
 import pprint
+import json
 
 def add_songs_from_existing_playlist_to_other_playlist_service(destination_playlist_name, source_playlist_name):
     """
@@ -105,3 +106,55 @@ def remove_all_songs_from_playlist_service(title: str):
         return backend_playlist.remove_song_from_playlist(playlist_id=playlist_id, songs=tracks)
     except Exception as e:
         return e
+
+def print_playlist_information_on_text_file_service(title: str, file_name: str):
+    def write_attribute(file, obj, attribute_name):
+        if attribute_name in obj:
+            value = obj[attribute_name]
+            if isinstance(value, dict):
+                if 'name' in value and 'id' in value:
+                    file.write(f"  - **{attribute_name.capitalize()}**: {value['name']} (ID: {value['id']})\n")
+                else:
+                    file.write(f"  - **{attribute_name.capitalize()}**: {value}\n")
+            elif isinstance(value, list):
+                file.write(f"  - **{attribute_name.capitalize()}**: ")
+                for item in value:
+                    if isinstance(item, dict) and 'name' in item and 'id' in item:
+                        file.write(f"{item['name']} (ID: {item['id']}), ")
+                    else:
+                        file.write(f"{item}, ")
+                file.write("\n")
+            else:
+                file.write(f"  - **{attribute_name.capitalize()}**: {value}\n")
+        else:
+            file.write(f"  - **{attribute_name.capitalize()}**: N/A\n")
+    def write_object_to_file(obj, file_name):
+        with open(file_name + ".md", 'w') as file:
+            # Write file name
+            file.write(f"# {file_name}\n\n")
+            
+            # Write attributes of obj
+            file.write("## General:\n")
+            attributes_to_write = ['id', 'privacy', 'title', 'description', 'author', 'duration', 'duration_seconds', 'trackCount']
+            for attribute in attributes_to_write:
+                write_attribute(file, obj, attribute)
+            file.write("\n")
+
+            # Write Tracks
+            file.write("## Tracks:\n")
+            for track in obj['tracks']:
+                attributes_to_write = ['videoId', 'title', 'artists', 'album', 'likeStatus', 'isAvailable', 'isExplicit', 'videoType']
+                for attribute in attributes_to_write:
+                    write_attribute(file, track, attribute)
+                file.write("\n")
+
+    try:
+        playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
+        obj = backend_playlist.get_playlist(playlist_id=playlist_id)
+        pprint.pprint(obj)
+        write_object_to_file(obj=obj, file_name=file_name)
+        return f"Text File - {file_name} - Created"
+    except Exception as e:
+        return e
+
+

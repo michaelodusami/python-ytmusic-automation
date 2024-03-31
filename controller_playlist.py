@@ -79,3 +79,8 @@ class Playlist:
                 print(response)
             else:
                 print("[FAILED] Removing all songs from playlist")
+
+        def print_playlist_information_on_text_file_controller(self):
+            name_of_playlist = self.prompt_user("Enter the name of the playlist to be displayed on the file: ")
+            name_of_textfile = self.prompt_user("Enter the title of the text file to be created: ")
+            print(service_playlist.print_playlist_information_on_text_file_service(title=name_of_playlist, file_name=name_of_textfile))
