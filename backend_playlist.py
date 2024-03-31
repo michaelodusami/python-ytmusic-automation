@@ -8,7 +8,6 @@ Description: backend module responsible for interacting directly with the yt mus
 
 from ytmusic_instance import my_ytmusic
 import pprint
-from typing import Union
 
 def add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id: str, list_of_songs: list):
     status = my_ytmusic.add_playlist_items(playlistId=playlist_id, videoIds=list_of_songs)
@@ -96,3 +95,6 @@ def create_playlist(title = "New Playlist", description = ""):
     """
     status = my_ytmusic.create_playlist(title=title, description=description)
     print("Playlist Created")
+
+def delete_playlist(playlist_id):
+    status = my_ytmusic.delete_playlist(playlistId=playlist_id)
