@@ -14,6 +14,7 @@ class Interface:
             "6p": self.playlistController.add_songs_from_existing_playlist_to_other_playlist_controller,
             "7p": self.playlistController.remove_all_songs_from_playlist_controller,
             "8p": self.playlistController.print_playlist_information_on_text_file_controller,
+            "9p": self.playlistController.viewPlaylistInformation,
         }
 
     def print_title(self, title):
@@ -29,6 +30,7 @@ class Interface:
         print("6p. Add all playlist song items to another playlist")
         print("7p. Remove all songs from playlist")
         print("8p. Send Playlist Songs To Markdown File")
+        print("9p. View Playlist Information")
 
     def get_choice(self):
         self.user_choice = pyinputplus.inputStr(prompt="your choice -> ")
