@@ -163,8 +163,10 @@ def get_playlist_information(title: str):
         playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
         playlist = backend_playlist.get_playlist(playlist_id=playlist_id)
         backup_value = "N/A"
+        if not playlist:
+            return "error"
         general_info = {
-            "id": playlist.get("id"),
+            "id": playlist.get("id", backup_value),
             "title": playlist.get("title", backup_value),
             "description": playlist.get("description", backup_value),
             "year": playlist.get("year", backup_value),
@@ -172,17 +174,7 @@ def get_playlist_information(title: str):
             "total duration": playlist.get("duration", backup_value),
             "total trackCount": playlist.get("trackCount", backup_value)
         }
-        tracks_info = []
-        for track in playlist["tracks"]:
-            track_info = {
-                "title": track.get("title", backup_value),
-                "artists": [artist.get("name", backup_value) for artist in track.get("artists", [])],
-                "album": track.get("album", {}).get("name", backup_value),
-                "duration": track.get("duration", backup_value),
-                "likeStatus": track.get("likeStatus", backup_value)
-            }
-            tracks_info.append(track_info)
 
-        return [general_info, tracks_info]
+        return general_info
     except Exception as e:
         return e

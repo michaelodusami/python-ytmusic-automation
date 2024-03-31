@@ -30,6 +30,9 @@ class Interface:
         print("7p. Remove all songs from playlist")
         print("8p. Send Playlist Songs To Markdown File")
         print("9p. View Playlist Information")
+    
+    def print_quit(self):
+        print("q. Quit program")  # added option to quit
 
     def get_choice(self):
         self.user_choice = pyinputplus.inputStr(prompt="your choice -> ")
@@ -37,8 +40,14 @@ class Interface:
     def handleChoice(self):
         if "p" in self.user_choice:
             self.handlePlaylistChoice()
-        # reset choice
-        self.user_choice = None
+        elif "q" == self.user_choice:
+            print("Exiting program...")
+            exit()
+        else:
+            print("Invalid choice : try again...")
+            self.user_choice = None
+
+       
 
     def handlePlaylistChoice(self):
         if self.user_choice in self.choices:
