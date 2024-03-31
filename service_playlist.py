@@ -37,5 +37,5 @@ def add_songs_from_existing_playlist_to_other_playlist_service(destination_playl
     except Exception as e:
         print(e)
 
-def create_playlist_service(title = "New Playlist", description = "", privacy_status = "PRIVATE"):
-    backend_playlist.create_playlist(title=title, privacy_status=privacy_status, description=description)
+def create_playlist_service(title = "New Playlist", description = ""):
+    backend_playlist.create_playlist(title=title,description=description)
