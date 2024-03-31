@@ -152,7 +152,6 @@ def print_playlist_information_on_text_file_service(title: str, file_name: str):
     try:
         playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
         obj = backend_playlist.get_playlist(playlist_id=playlist_id)
-        pprint.pprint(obj)
         write_object_to_file(obj=obj, file_name=file_name)
         return f"Text File - {file_name} - Created"
     except Exception as e:
