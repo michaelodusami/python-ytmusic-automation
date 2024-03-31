@@ -54,7 +54,7 @@ def rename_playlist_service(title : str, newTitle : str):
     except Exception as e:
         print(e)
 
-def add_songs_to_playlist(title : str, song_ids: list):
+def add_songs_to_playlist_service(title : str, song_ids: list):
     try:
         playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
         tracks = backend_playlist.get_playlist_tracks(playlist_id=playlist_id)
