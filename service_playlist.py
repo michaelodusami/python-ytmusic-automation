@@ -54,8 +54,13 @@ def rename_playlist_service(title : str, newTitle : str):
     except Exception as e:
         print(e)
 
-def add_songs_to_playlist_service(title : str, song_ids: list):
+def add_songs_to_playlist_service(title : str, song_names: list):
     try:
+        song_ids = []
+        for song in song_names:
+            data = backend_playlist.get_song_information(song)
+            song_ids.append(data["videoId"])
+
         playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
         tracks = backend_playlist.get_playlist_tracks(playlist_id=playlist_id)
         # make sure the songs to be added does not already exists
@@ -63,6 +68,9 @@ def add_songs_to_playlist_service(title : str, song_ids: list):
         # add that list of ids to the playlist
         track_song_ids = list(set([track["videoId"] for track in tracks]))
         unique_song_ids = [song_id for song_id in song_ids if song_id not in track_song_ids]
+        if not unique_song_ids:
+            print("Songs already in playlist.")
+            return
         backend_playlist.add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id=playlist_id, list_of_songs=unique_song_ids)
     except Exception as e:
         print(e)
