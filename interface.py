@@ -5,6 +5,10 @@ class Interface:
     def __init__(self) -> None:
         self.playlistController = Playlist()
         self.user_choice = None
+        self.choices = {
+            "1p": self.playlistController.create_playlist_controller,
+            "6p": self.playlistController.add_songs_from_existing_playlist_to_other_playlist,
+        }
 
     def print_title(self, title):
          print(f"\n======= {title} =======")
@@ -29,7 +33,6 @@ class Interface:
         self.user_choice = None
 
     def handlePlaylistChoice(self):
-        match self.user_choice:
-            case "6p":
-                self.playlistController.add_songs_from_existing_playlist_to_other_playlist()
+        if self.user_choice in self.choices:
+            self.choices[self.user_choice]()
         
