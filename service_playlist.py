@@ -94,7 +94,18 @@ def remove_songs_from_playlist_service(title: str, song_names: list):
         videos = backend_playlist.get_playlist(playlist_id=playlist_id)
         playlist_tracks = videos["tracks"]
         similar_tracks = filter_similar_tracks(playlist_tracks, song_names)
+        if not similar_tracks:
+            print("Song not found.")
+            return
         backend_playlist.remove_song_from_playlist(playlist_id=playlist_id, songs=similar_tracks)
         
+    except Exception as e:
+        print(e)
+
+def remove_all_songs_from_playlist_service(title: str):
+    try:
+        playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
+        tracks = backend_playlist.get_playlist_tracks(playlist_id=playlist_id)
+        backend_playlist.remove_song_from_playlist(playlist_id=playlist_id, songs=tracks)
     except Exception as e:
         print(e)

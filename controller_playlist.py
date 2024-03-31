@@ -63,3 +63,10 @@ class Playlist:
                     break
                 songs.append(song)
             service_playlist.remove_songs_from_playlist_service(title=name_of_playlist, song_names=songs)
+        
+        def remove_all_songs_from_playlist_controller(self):
+            name_of_playlist = self.prompt_user("Enter the name of the playlist to remove a song from: ")
+            confirmation = (pyip.inputYesNo(prompt="Are you sure you want to remove all songs from playlist (Yes or No): ")).lower()
+            if confirmation == "yes" or confirmation == "y":
+                service_playlist.remove_all_songs_from_playlist_service(title=name_of_playlist)
+            
