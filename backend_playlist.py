@@ -98,3 +98,4 @@ def create_playlist(title = "New Playlist", description = ""):
 
 def delete_playlist(playlist_id):
     status = my_ytmusic.delete_playlist(playlistId=playlist_id)
+    print("Playlist has been deleted")
