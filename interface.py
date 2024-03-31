@@ -14,7 +14,8 @@ class Interface:
             "7p": controller_playlist.remove_all_songs_from_playlist_controller,
             "8p": controller_playlist.print_playlist_information_on_text_file_controller,
             "9p": controller_playlist.view_playlist_information_controller,
-            "10p": controller_playlist.add_all_playlist_items_to_playlist_controller
+            "10p": controller_playlist.add_all_playlist_items_to_playlist_controller,
+            "11p": controller_playlist.delete_multiple_playlist_controller
         }
 
     def print_title(self, title):
@@ -32,7 +33,9 @@ class Interface:
         print("8p. Send Playlist Songs To Markdown File")
         print("9p. View Playlist Information")
         print("10p. Add all playlist song items to one playlist")
-    
+        print("11p. Delete multiple playlists from account")
+
+        
     def print_quit(self):
         print("q. Quit program")  # added option to quit
 

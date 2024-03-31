@@ -57,6 +57,13 @@ def remove_playlist_service(title : str):
         return backend_playlist.delete_playlist(playlist_id)
     except Exception as e:
         return e
+    
+def delete_multiple_playlist_service(list_of_playlist_names : list):
+    if not list:
+        return "No playlist names listed."
+    for name in list_of_playlist_names:
+        response = remove_playlist_service(name)
+        print(response)
 
 def rename_playlist_service(title : str, newTitle : str):
     try:

@@ -37,6 +37,15 @@ def remove_playlist_controller():
     response = service_playlist.remove_playlist_service(title=name_of_playlist)
     print(response)
 
+def delete_multiple_playlist_controller():
+    all_playlists = []
+    while True:
+        playlist = prompt_user("Enter the name of the playlist to delete | Enter -1 to stop: ")
+        if playlist == "-1":
+            break
+        all_playlists.append(playlist)
+    print(service_playlist.delete_multiple_playlist_service(list_of_playlist_names = all_playlists))
+
 def rename_playlist_controller():
     name_of_playlist = prompt_user("Enter the name of the playlist to rename: ")
     new_name_of_playlist = prompt_user("Enter the new name of the playlist: ")
