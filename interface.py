@@ -14,7 +14,7 @@ class Interface:
             "6p": self.playlistController.add_songs_from_existing_playlist_to_other_playlist_controller,
             "7p": self.playlistController.remove_all_songs_from_playlist_controller,
             "8p": self.playlistController.print_playlist_information_on_text_file_controller,
-            "9p": self.playlistController.viewPlaylistInformation,
+            "9p": self.playlistController.view_playlist_information_controller,
         }
 
     def print_title(self, title):

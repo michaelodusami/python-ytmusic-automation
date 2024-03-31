@@ -84,3 +84,21 @@ class Playlist:
             name_of_playlist = self.prompt_user("Enter the name of the playlist to be displayed on the file: ")
             name_of_textfile = self.prompt_user("Enter the title of the text file to be created: ")
             print(service_playlist.print_playlist_information_on_text_file_service(title=name_of_playlist, file_name=name_of_textfile))
+        
+        def view_playlist_information_controller(self):
+            name_of_playlist = self.prompt_user("Enter the name of the playlist to be displayed: ")
+            objects = service_playlist.get_playlist_information(title=name_of_playlist)
+            if not isinstance(objects, list):
+                print(objects)
+                return
+
+            print("\nGeneral Information:")
+            for key, value in objects[0].items():
+                print(f"{key}: {value}")
+
+            # Printing out the tracks information
+            print("\nTracks Information:")
+            for index, track in enumerate(objects[1], start=1):
+                print(f"Track {index}:")
+                for key, value in track.items():
+                    print(f"  {key}: {value}")
