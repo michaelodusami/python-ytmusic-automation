@@ -39,3 +39,10 @@ def add_songs_from_existing_playlist_to_other_playlist_service(destination_playl
 
 def create_playlist_service(title = "New Playlist", description = ""):
     backend_playlist.create_playlist(title=title,description=description)
+
+def remove_playlist_service(title : str):
+    try:
+        playlist_id = backend_playlist.get_playlist_id(name_of_playlist=title)
+        backend_playlist.delete_playlist(playlist_id)
+    except Exception as e:
+        print(e)
