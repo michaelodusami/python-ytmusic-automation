@@ -96,6 +96,11 @@ def create_playlist(title = "New Playlist", description = ""):
     status = my_ytmusic.create_playlist(title=title, description=description)
     print("Playlist Created")
 
-def delete_playlist(playlist_id):
+def delete_playlist(playlist_id : str):
     status = my_ytmusic.delete_playlist(playlistId=playlist_id)
     print("Playlist has been deleted")
+
+def rename_playlist(playlist_id : str, title : str ):
+    status = my_ytmusic.edit_playlist(playlistId=playlist_id, title=title)
+    print("Playlist Has Been Renamed")
+
