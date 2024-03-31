@@ -85,7 +85,13 @@ def view_playlist_information_controller():
     info = service_playlist.get_playlist_information(title=name_of_playlist)
     if not isinstance(info, list):
         print(info)
+        return
 
     print("\nGeneral Information:")
     for key, value in info.items():
         print(f"{key}: {value}")
+
+
+def add_all_playlist_items_to_playlist_controller():
+    destination_playlist_name = prompt_user("Enter the name of the destination playlist: ")
+    print(service_playlist.add_all_playlist_items_to_playlist_service(title=destination_playlist_name))

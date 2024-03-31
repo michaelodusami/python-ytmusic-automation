@@ -34,9 +34,19 @@ def add_songs_from_existing_playlist_to_other_playlist_service(destination_playl
         unique_songs = backend_playlist.find_unique_songs_for_playlist(destination_id=destination_playlist_id, source_id=source_playlist_id)
         if not unique_songs:
             return "Songs already in playlist..."
-        return backend_playlist.add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id=destination_playlist_id, list_of_songs=unique_songs)
+        return backend_playlist.add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id=destination_playlist_id, list_of_songs=unique_songs, title_of_source=source_playlist_name)
     except Exception as e:
         return e
+
+def add_all_playlist_items_to_playlist_service(title : str):
+        all_playlists = backend_playlist.get_all_playlists()
+        for playlist in all_playlists:
+            playlist_title = playlist["title"]
+            response = add_songs_from_existing_playlist_to_other_playlist_service(destination_playlist_name=title, source_playlist_name=playlist_title)
+            print(response)
+
+
+
 
 def create_playlist_service(title = "New Playlist", description = ""):
    return backend_playlist.create_playlist(title=title,description=description)
@@ -71,7 +81,7 @@ def add_songs_to_playlist_service(title : str, song_names: list):
         unique_song_ids = [song_id for song_id in song_ids if song_id not in track_song_ids]
         if not unique_song_ids:
             return "Songs already in playlist."
-        return backend_playlist.add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id=playlist_id, list_of_songs=unique_song_ids)
+        return backend_playlist.add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id=playlist_id, list_of_songs=unique_song_ids, title_of_source="[NULL]")
     except Exception as e:
         return e
     

@@ -9,10 +9,10 @@ Description: backend module responsible for interacting directly with the yt mus
 from ytmusic_instance import my_ytmusic
 import pprint
 
-def add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id: str, list_of_songs: list):
+def add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id: str, list_of_songs: list, title_of_source: str):
     status = my_ytmusic.add_playlist_items(playlistId=playlist_id, videoIds=list_of_songs)
     # printStatus(status)
-    return "Songs Added"
+    return f"Songs added from playlist : {title_of_source}"
 
 
 # def printStatus(status : str | dict):
@@ -20,6 +20,9 @@ def add_playlist_songs_to_playlist_with_list_of_video_id(playlist_id: str, list_
 
 def get_playlist(playlist_id : str):
     return my_ytmusic.get_playlist(playlistId=playlist_id)
+
+def get_all_playlists():
+    return my_ytmusic.get_library_playlists(limit=None)
 
 def get_playlist_id(name_of_playlist: str):
     """
