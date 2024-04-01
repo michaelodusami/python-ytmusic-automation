@@ -40,32 +40,19 @@ python main.py
 
 The program offers the following playlist management functionalities:
 
-- Creating a new playlist
-- Removing an existing playlist
-- Renaming a playlist
-- Adding a song to a playlist
-- Removing a song from a playlist
-- Adding all songs from one playlist to another
-- Removing all songs from a playlist
-- Sending playlist songs to a Markdown file
-- Viewing playlist information
+<img src="example.png" alt="example of features" width="400"/>
 
 ## Structure
 
-**interface.py**
-    - This file defines the Interface class responsible for managing user interactions and displaying the menu for playlist operations. It utilizes the controller_playlist module to execute user-selected actions.
+**interface.py** - This file defines the Interface class responsible for managing user interactions and displaying the menu for playlist operations. It utilizes the controller_playlist module to execute user-selected actions.
 
-**service_playlist.py**
-    - This module serves as a controller layer responsible for managing user interactions and API connections related to playlists. It contains functions that handle various playlist operations, such as creating playlists, adding songs, removing playlists, and more. Each function in this module communicates with the backend_playlist module to perform the necessary actions.
+**service_playlist.py** - This module serves as a controller layer responsible for managing user interactions and API connections related to playlists. It contains functions that handle various playlist operations, such as creating playlists, adding songs, removing playlists, and more. Each function in this module communicates with the backend_playlist module to perform the necessary actions.
 
-**controller_playlist.py**
-    - This file contains functions that act as an intermediary between the user interface (interface.py) and the service layer (service_playlist.py). These functions prompt the user for input and call the corresponding service functions to execute playlist operations.
+**controller_playlist.py** - This file contains functions that act as an intermediary between the user interface (interface.py) and the service layer (service_playlist.py). These functions prompt the user for input and call the corresponding service functions to execute playlist operations.
 
-**ytmusic_instance.py**
-    - This script initializes a YTMusic object using the YTMusicAPI library, allowing interaction with YouTube Music's web interface. 
+**ytmusic_instance.py** - This script initializes a YTMusic object using the YTMusicAPI library, allowing interaction with YouTube Music's web interface.
 
-**backend_playlist.py**
-    - This module serves as the backend layer responsible for directly interacting with the YouTube Music instance or account. It contains functions that perform actions such as adding songs to playlists, retrieving playlist information, creating playlists, and more. These functions utilize the YTMusic object initialized in ytmusic_instance.py to communicate with YouTube Music.
+**backend_playlist.py** - This module serves as the backend layer responsible for directly interacting with the YouTube Music instance or account. It contains functions that perform actions such as adding songs to playlists, retrieving playlist information, creating playlists, and more. These functions utilize the YTMusic object initialized in ytmusic_instance.py to communicate with YouTube Music.
 
 ## Usage Instructions
 
@@ -95,5 +82,3 @@ API used: https://ytmusicapi.readthedocs.io/en/stable/index.html
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-
